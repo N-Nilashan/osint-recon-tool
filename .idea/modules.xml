@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../../python_learnings/Requests/.idea/Requests.iml" filepath="$PROJECT_DIR$/../../python_learnings/Requests/.idea/Requests.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../hash_checker/.idea/hash_checker.iml" filepath="$PROJECT_DIR$/../hash_checker/.idea/hash_checker.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/osint-recon-tool.iml" filepath="$PROJECT_DIR$/.idea/osint-recon-tool.iml" />
+    </modules>
+  </component>
+</project>
