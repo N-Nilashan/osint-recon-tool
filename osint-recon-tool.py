@@ -2,6 +2,7 @@ import argparse
 from colorama import init, Fore, Back, Style
 import whois
 import dns.resolver
+from concurrent.futures import ThreadPoolExecutor
 
 # Initialize colorama for colored console output
 init(autoreset=True)
@@ -36,6 +37,22 @@ def get_dns_records(domain):
     for rdata in server:
         print("servers control the domain: ",rdata.target)
 
+def check_subdomains(subdomain):
+    try:
+        ip_address = dns.resolver.resolve(subdomain,'A')
+        for rdata in ip_address:
+            print(f"{subdomain} → {rdata.address}")
+    except (dns.resolver.NXDOMAIN, dns.resolver.NoAnswer, dns.exception.Timeout):
+        pass
+
+def enumerate_subdomains(domain):
+    with open("subdomains_wordlist.txt", 'r') as f:
+        words = [line.strip() for line in f]
+
+    with ThreadPoolExecutor(max_workers=30) as executor:
+        for word in words:
+            subdomain = f"{word}.{domain}"
+            executor.submit(check_subdomains,subdomain)
 
 if args.domain:
     args.domain = str(args.domain)
@@ -45,6 +62,10 @@ if args.domain:
     print("")
     print(f"Getting {args.domain} DNS Records...")
     get_dns_records(args.domain)
+    print("")
+    print(f"Getting Subdomain Enumeration of {args.domain}")
+    check_subdomains(args.domain)
+    enumerate_subdomains(args.domain)
 
 
 
