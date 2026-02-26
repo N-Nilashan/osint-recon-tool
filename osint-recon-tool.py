@@ -3,6 +3,8 @@ from colorama import init, Fore, Back, Style
 import whois
 import dns.resolver
 from concurrent.futures import ThreadPoolExecutor
+import requests
+import time
 
 # Initialize colorama for colored console output
 init(autoreset=True)
@@ -54,6 +56,34 @@ def enumerate_subdomains(domain):
             subdomain = f"{word}.{domain}"
             executor.submit(check_subdomains,subdomain)
 
+def check_reputation(domain):
+    api_key =  "52d4f45f9dbf66d683980f4dce8b61bf9db5838f1eefcb420b48ff6bf18d66d9"
+    url_to_check = domain
+    headers = {
+        "x-apikey": api_key,
+        "User-Agent": "Mozilla/5.0 (Linux; Android 13; Pixel 6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/121.0.0.0 Mobile Safari/537.36"
+    }
+    post_response = requests.post(
+        "https://www.virustotal.com/api/v3/urls",
+        headers=headers,
+        data = {"url": url_to_check}
+    )
+    post_data = post_response.json()
+    analysis_id = post_data["data"]["id"]
+    analysis_url = f"https://www.virustotal.com/api/v3/analyses/{analysis_id}"
+
+    time.sleep(10)
+
+    get_response = requests.get(analysis_url, headers={"x-apikey": api_key})
+    result_data = get_response.json()
+
+    stats = result_data.get("data", {}).get("attributes", {}).get("stats", {})
+    print("Reputation stats:", stats)
+
+    results = result_data.get("data", {}).get("attributes", {}).get("results", {})
+    for engine, info in results.items():
+        print(f"{engine}: {info['category']}")
+
 if args.domain:
     args.domain = str(args.domain)
     print(f"Starting recon on {args.domain}...")
@@ -64,9 +94,7 @@ if args.domain:
     get_dns_records(args.domain)
     print("")
     print(f"Getting Subdomain Enumeration of {args.domain}")
-    check_subdomains(args.domain)
-    enumerate_subdomains(args.domain)
-
-
-
-
+    #enumerate_subdomains(args.domain)
+    print("")
+    print("Checking reputation...")
+    check_reputation(args.domain)
