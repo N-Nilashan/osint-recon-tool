@@ -60,13 +60,8 @@ Here is the complete README.md content in one clean block — ready to copy-past
 - Unauthorized scanning can violate laws (CFAA, Computer Misuse Act, etc.)
 - This tool is for educational / authorized security testing only
 
-- ## Possible future additions (if you want to extend it)
-- Multiple domain support at once
-- Certificate Transparency logs for more subdomains
-- HTTP status + title for discovered subdomains
-- Screenshots of live web interfaces
-- Shodan / Censys / BinaryEdge integration
+ ## Made with ☕ by Nimesh Nilashan
 
-- Made with ☕ by Nimesh Nilashan  
-- Happy (and legal) hunting 🚀
+ 
+### Happy (and legal) hunting 🚀
 
