@@ -46,6 +46,9 @@ Here is the complete README.md content in one clean block — ready to copy-past
   - ## 🔎 Subdomain Enumeration
   - ## 🛡️ Reputation Analysis
 
+- ## Terminal Output
+![Terminal Output Screenshot](screenshots/terminal_output.png)
+
 - ## Important Notes
 - VirusTotal free API → ~4–5 requests per minute (be patient)
 - Subdomain enumeration is noisy → start with small wordlist (500–5000 entries)

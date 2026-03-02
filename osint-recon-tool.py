@@ -172,7 +172,7 @@ sys.stderr.write(Fore.YELLOW + "[+] Fetching DNS records...\n")
 get_dns_records(args.domain)
 
 sys.stderr.write(Fore.YELLOW + "[+] Enumerating subdomains...\n")
-enumerate_subdomains(args.domain)
+#enumerate_subdomains(args.domain)
 
 sys.stderr.write(Fore.YELLOW + "[+] Checking reputation via VirusTotal...\n")
 check_reputation(args.domain)
