@@ -1,0 +1,5 @@
+argparse
+colorama
+whois
+dnspython
+requests
